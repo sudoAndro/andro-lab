@@ -1,0 +1,21 @@
+# Never commit secrets!
+*.key
+*.pem
+*-key.txt
+auth-keys/
+secrets/
+.env
+.env.local
+
+# Personal notes (not for the public)
+private/
+notes-private.md
+todo-private.md
+
+# Editor / OS clutter
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
