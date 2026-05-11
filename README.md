@@ -103,10 +103,10 @@ If any single layer fails, the others continue protecting the system.
 Each component has detailed setup notes including the mistakes I made:
 
 - 📘 [**Architecture Deep-Dive**](./docs/architecture.md) — How everything connects
-- 🔥 [**OPNsense + NordVPN + Killswitch**](./docs/opnsense.md) — The foundation *(coming soon)*
-- 🛡️ [**PiHole DNS Filtering**](./docs/pihole.md) — Blocking ads at the network level *(coming soon)*
-- 🌐 [**Tailscale Setup**](./docs/tailscale.md) — Mesh VPN, Subnet Routes, Exit Node *(coming soon)*
-- 🔒 [**Vaultwarden with HTTPS**](./docs/vaultwarden.md) — Self-hosted password manager *(coming soon)*
+- 🔥 [**OPNsense + NordVPN + Killswitch**](./docs/opnsense.md) — The foundation
+- 🛡️ [**PiHole DNS Filtering**](./docs/pihole.md) — Blocking ads at the network level
+- 🌐 [**Tailscale Setup**](./docs/tailscale.md) — Mesh VPN, Subnet Routes, Exit Node
+- 🔒 [**Vaultwarden with HTTPS**](./docs/vaultwarden.md) — Self-hosted password manager
 - 💡 [**Lessons Learned**](./docs/lessons-learned.md) — What broke, what I learned
 
 ---
