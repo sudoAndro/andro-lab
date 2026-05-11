@@ -19,35 +19,11 @@ This repository documents my self-built homelab — every architectural decision
 
 ---
 
-## 🏗️ Architecture Overview
+## 🏗️ Architecture
 
-```
-                      🌐 Internet
-                          ↑
-                   NordVPN-WireGuard
-                          ↑
-            ┌─────────────────────────────┐
-            │  — OPNsense (Firewall)      │
-            │  ─ Killswitch               │
-            │  ─ NordVPN tunnel           │
-            │  ─ Tailscale Subnet Router  │
-            │  ─ Tailscale Exit Node      │
-            └─────────────────────────────┘
-                          ↓
-                  192.168.X.0/24 (LAN)
-                          ↓
-            ┌─────────┬───────────────────┐
-            ↓         ↓                   ↓
-       🔧 PiHole  🔒 Vaultwarden    🖥️ More VMs
-           (DNS)      (Passwords)
-                          
-   📱 Phone + 💻 Laptops (anywhere in the world)
-            ↓ Tailscale Mesh VPN
-            ↓
-   Access everything securely
-```
+![Architecture diagram](./diagrams/architecture.svg)
 
-> 📊 **Detailed architecture diagram:** [`/diagrams/architecture.svg`](./diagrams/architecture.svg)
+> 📊 **Full architecture details:** [`docs/architecture.md`](./docs/architecture.md)
 
 ---
 
@@ -127,10 +103,10 @@ If any single layer fails, the others continue protecting the system.
 Each component has detailed setup notes including the mistakes I made:
 
 - 📘 [**Architecture Deep-Dive**](./docs/architecture.md) — How everything connects
-- 🔥 [**OPNsense + NordVPN + Killswitch**](./docs/opnsense.md) — The foundation
-- 🛡️ [**PiHole DNS Filtering**](./docs/pihole.md) — Blocking ads at the network level
-- 🌐 [**Tailscale Setup**](./docs/tailscale.md) — Mesh VPN, Subnet Routes, Exit Node
-- 🔒 [**Vaultwarden with HTTPS**](./docs/vaultwarden.md) — Self-hosted password manager
+- 🔥 [**OPNsense + NordVPN + Killswitch**](./docs/opnsense.md) — The foundation *(coming soon)*
+- 🛡️ [**PiHole DNS Filtering**](./docs/pihole.md) — Blocking ads at the network level *(coming soon)*
+- 🌐 [**Tailscale Setup**](./docs/tailscale.md) — Mesh VPN, Subnet Routes, Exit Node *(coming soon)*
+- 🔒 [**Vaultwarden with HTTPS**](./docs/vaultwarden.md) — Self-hosted password manager *(coming soon)*
 - 💡 [**Lessons Learned**](./docs/lessons-learned.md) — What broke, what I learned
 
 ---
@@ -187,7 +163,6 @@ Planned next steps:
 I'm always open to discussions about cybersecurity, networking, and homelabs.
 
 - 🌐 Website: [andrijantadic.ch](https://andrijantadic.ch)
-- 💼 LinkedIn: *coming soon*
 - 📧 Email: *via my website*
 
 If you're a hiring manager or recruiter in cybersecurity — let's talk.

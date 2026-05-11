@@ -6,22 +6,22 @@ This document explains how every component in the lab connects and why I made sp
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                            INTERNET                             │
+│                          🌐 INTERNET                            │
 └─────────────────────────────────────────────────────────────────┘
                                 ↑
                     NordVPN Tunnel (WireGuard)
                                 ↑
 ┌─────────────────────────────────────────────────────────────────┐
-│     OPNsense  (192.168.X.4 on WAN, 192.168.Y.1 on LAN)          │
+│  🔥 OPNsense  (192.168.X.4 on WAN, 192.168.Y.1 on LAN)          │
 │  ──────────────────────────────────────────────────────────     │
-│  Roles:                                                         │
-│   • WAN gateway with NordVPN-WireGuard tunnel                   │
-│   • Killswitch (block any traffic that bypasses VPN)            │
-│   • Stateful firewall                                           │
-│   • Tailscale Subnet Router (advertises 192.168.Y.0/24)         │
-│   • Tailscale Exit Node (mobile clients route through here)     │
-│   • DNS forwarder → PiHole → Cloudflare/Quad9                   │
-│   • Kea DHCP server for LAN                                     │
+│  Roles:                                                          │
+│   • WAN gateway with NordVPN-WireGuard tunnel                    │
+│   • Killswitch (block any traffic that bypasses VPN)             │
+│   • Stateful firewall                                            │
+│   • Tailscale Subnet Router (advertises 192.168.Y.0/24)          │
+│   • Tailscale Exit Node (mobile clients route through here)      │
+│   • DNS forwarder → PiHole → Cloudflare/Quad9                    │
+│   • Kea DHCP server for LAN                                      │
 └─────────────────────────────────────────────────────────────────┘
                                 ↓
                      Internal LAN: 192.168.Y.0/24
@@ -29,7 +29,7 @@ This document explains how every component in the lab connects and why I made sp
                 ┌───────────────┼───────────────┐
                 ↓               ↓               ↓
      ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-     │ PiHole       │  │ Vaultwarden  │  │  More VMs    │
+     │ 🔧 PiHole    │  │ 🔒 Vaultwarden│  │ 🖥️ More VMs  │
      │ DNS filter   │  │ Password mgr │  │ (planned)    │
      │ + Cloudflare │  │ Docker +     │  │              │
      │ + Quad9      │  │ Caddy + TLS  │  │              │

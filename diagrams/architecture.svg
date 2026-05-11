@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 760" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <title>Andro Lab — Cybersecurity Homelab Architecture</title>
+  <desc>Multi-layer defense-in-depth architecture: Internet → NordVPN → OPNsense firewall (with killswitch and Tailscale exit node) → LAN with PiHole DNS filter, Vaultwarden password manager, and additional VMs. Tailscale mesh overlay connects mobile devices, laptops, and the Proxmox host.</desc>
+
+  <!-- Background -->
+  <rect width="800" height="760" fill="#fafafa"/>
+
+  <!-- Arrow marker definitions -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1 L8 5 L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-size="22" font-weight="600" fill="#1a1a1a">Andro Lab — Defense in Depth</text>
+  <text x="400" y="62" text-anchor="middle" font-size="13" fill="#666">Multi-layer cybersecurity homelab</text>
+
+  <!-- Layer 1: Internet -->
+  <g>
+    <rect x="280" y="90" width="240" height="56" rx="8" fill="#f1efe8" stroke="#888780" stroke-width="1"/>
+    <text x="400" y="115" text-anchor="middle" font-size="15" font-weight="500" fill="#2c2c2a">🌐 Internet</text>
+    <text x="400" y="134" text-anchor="middle" font-size="12" fill="#5f5e5a">Untrusted by default</text>
+  </g>
+
+  <!-- Arrow Internet → OPNsense -->
+  <line x1="400" y1="146" x2="400" y2="180" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="490" y="168" font-size="11" fill="#5f5e5a">NordVPN-WireGuard</text>
+
+  <!-- Layer 2: OPNsense -->
+  <g>
+    <rect x="200" y="186" width="400" height="100" rx="12" fill="#faece7" stroke="#993c1d" stroke-width="1"/>
+    <text x="400" y="214" text-anchor="middle" font-size="16" font-weight="600" fill="#712b13">🔥 OPNsense Firewall</text>
+    <text x="400" y="236" text-anchor="middle" font-size="12" fill="#993c1d">• Killswitch · NAT · Stateful filtering</text>
+    <text x="400" y="254" text-anchor="middle" font-size="12" fill="#993c1d">• NordVPN-WireGuard tunnel</text>
+    <text x="400" y="272" text-anchor="middle" font-size="12" fill="#993c1d">• Tailscale Subnet Router + Exit Node</text>
+  </g>
+
+  <!-- Arrow OPNsense → LAN -->
+  <line x1="400" y1="286" x2="400" y2="320" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="490" y="308" font-size="11" fill="#5f5e5a">LAN: 192.168.Y.0/24</text>
+
+  <!-- Layer 3: LAN Services -->
+  <g>
+    <!-- PiHole -->
+    <rect x="80" y="326" width="200" height="100" rx="8" fill="#eeedfe" stroke="#534ab7" stroke-width="1"/>
+    <text x="180" y="354" text-anchor="middle" font-size="15" font-weight="500" fill="#3c3489">🛡️ PiHole</text>
+    <text x="180" y="376" text-anchor="middle" font-size="12" fill="#534ab7">DNS Filter</text>
+    <text x="180" y="394" text-anchor="middle" font-size="11" fill="#534ab7">Blocks ads + trackers</text>
+    <text x="180" y="412" text-anchor="middle" font-size="11" fill="#534ab7">→ Cloudflare / Quad9</text>
+
+    <!-- Vaultwarden -->
+    <rect x="300" y="326" width="200" height="100" rx="8" fill="#e1f5ee" stroke="#0f6e56" stroke-width="1"/>
+    <text x="400" y="354" text-anchor="middle" font-size="15" font-weight="500" fill="#085041">🔒 Vaultwarden</text>
+    <text x="400" y="376" text-anchor="middle" font-size="12" fill="#0f6e56">Password Manager</text>
+    <text x="400" y="394" text-anchor="middle" font-size="11" fill="#0f6e56">2FA + Argon2 token</text>
+    <text x="400" y="412" text-anchor="middle" font-size="11" fill="#0f6e56">Caddy + Crowdsec</text>
+
+    <!-- More VMs -->
+    <rect x="520" y="326" width="200" height="100" rx="8" fill="#f1efe8" stroke="#888780" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="620" y="354" text-anchor="middle" font-size="15" font-weight="500" fill="#2c2c2a">🖥️ More VMs</text>
+    <text x="620" y="376" text-anchor="middle" font-size="12" fill="#5f5e5a">Planned services</text>
+    <text x="620" y="394" text-anchor="middle" font-size="11" fill="#5f5e5a">Monitoring · IDS</text>
+    <text x="620" y="412" text-anchor="middle" font-size="11" fill="#5f5e5a">Backups · CI/CD</text>
+  </g>
+
+  <!-- Divider line -->
+  <line x1="40" y1="465" x2="760" y2="465" stroke="#b4b2a9" stroke-width="0.5" stroke-dasharray="4 4"/>
+  <text x="400" y="458" text-anchor="middle" font-size="12" font-style="italic" fill="#5f5e5a">─ Tailscale Mesh Overlay (100.X.X.X) ─</text>
+
+  <!-- Layer 4: Tailscale Mesh -->
+  <g>
+    <!-- Proxmox -->
+    <rect x="80" y="485" width="200" height="100" rx="8" fill="#e6f1fb" stroke="#185fa5" stroke-width="1"/>
+    <text x="180" y="513" text-anchor="middle" font-size="15" font-weight="500" fill="#0c447c">🏠 Proxmox Host</text>
+    <text x="180" y="535" text-anchor="middle" font-size="12" fill="#185fa5">Hypervisor</text>
+    <text x="180" y="553" text-anchor="middle" font-size="11" fill="#185fa5">Out-of-band mgmt</text>
+    <text x="180" y="571" text-anchor="middle" font-size="11" fill="#185fa5">Independent DNS</text>
+
+    <!-- Mobile -->
+    <rect x="300" y="485" width="200" height="100" rx="8" fill="#e6f1fb" stroke="#185fa5" stroke-width="1"/>
+    <text x="400" y="513" text-anchor="middle" font-size="15" font-weight="500" fill="#0c447c">📱 Mobile Phone</text>
+    <text x="400" y="535" text-anchor="middle" font-size="12" fill="#185fa5">Exit Node Client</text>
+    <text x="400" y="553" text-anchor="middle" font-size="11" fill="#185fa5">Internet via NordVPN</text>
+    <text x="400" y="571" text-anchor="middle" font-size="11" fill="#185fa5">DNS via PiHole</text>
+
+    <!-- Laptops -->
+    <rect x="520" y="485" width="200" height="100" rx="8" fill="#e6f1fb" stroke="#185fa5" stroke-width="1"/>
+    <text x="620" y="513" text-anchor="middle" font-size="15" font-weight="500" fill="#0c447c">💻 Laptops</text>
+    <text x="620" y="535" text-anchor="middle" font-size="12" fill="#185fa5">Mesh + Subnet</text>
+    <text x="620" y="553" text-anchor="middle" font-size="11" fill="#185fa5">Reach VMs anywhere</text>
+    <text x="620" y="571" text-anchor="middle" font-size="11" fill="#185fa5">Direct peer-to-peer</text>
+  </g>
+
+  <!-- Bottom: Security Layers Legend -->
+  <g>
+    <rect x="40" y="615" width="720" height="130" rx="10" fill="#ffffff" stroke="#d3d1c7" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <text x="60" y="640" font-size="14" font-weight="600" fill="#1a1a1a">🛡️ Five Independent Security Layers</text>
+
+    <rect x="60" y="654" width="12" height="12" rx="2" fill="#faece7" stroke="#993c1d" stroke-width="0.5"/>
+    <text x="80" y="664" font-size="12" fill="#3d3d3a">1. NordVPN — encrypts traffic, hides home IP from the internet</text>
+
+    <rect x="60" y="674" width="12" height="12" rx="2" fill="#faece7" stroke="#993c1d" stroke-width="0.5"/>
+    <text x="80" y="684" font-size="12" fill="#3d3d3a">2. OPNsense killswitch — blocks all traffic that would bypass the VPN tunnel</text>
+
+    <rect x="60" y="694" width="12" height="12" rx="2" fill="#eeedfe" stroke="#534ab7" stroke-width="0.5"/>
+    <text x="80" y="704" font-size="12" fill="#3d3d3a">3. PiHole — DNS-level filtering of ads, trackers, and malware domains</text>
+
+    <rect x="60" y="714" width="12" height="12" rx="2" fill="#e6f1fb" stroke="#185fa5" stroke-width="0.5"/>
+    <text x="80" y="724" font-size="12" fill="#3d3d3a">4. Tailscale — zero-trust mesh VPN with cryptographic device identity</text>
+
+    <rect x="380" y="714" width="12" height="12" rx="2" fill="#e1f5ee" stroke="#0f6e56" stroke-width="0.5"/>
+    <text x="400" y="724" font-size="12" fill="#3d3d3a">5. HTTPS + Crowdsec — TLS encryption + brute-force protection</text>
+  </g>
+
+</svg>
