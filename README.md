@@ -158,6 +158,13 @@ Planned next steps:
 
 ---
 
+## 🔗 Related Projects
+
+- [active-directory-lab](https://github.com/sudoAndro/active-directory-lab) — Windows Server 2022, AD DS, GPOs, DNS Filtering
+- [windows-starter-kit](https://github.com/sudoAndro/windows-starter-kit) — Automated PowerShell 7 Setup
+
+---
+
 ## 🤝 Connect
 
 I'm always open to discussions about cybersecurity, networking, and homelabs.
