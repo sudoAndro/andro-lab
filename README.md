@@ -62,6 +62,7 @@ If any single layer fails, the others continue protecting the system.
 - Vaultwarden (Bitwarden-compatible password manager)
 - Caddy (reverse proxy with automatic HTTPS)
 - Crowdsec (collaborative IPS)
+- Suricata (IDS/IPS mit Telegram Alerting)
 
 **Tools used during build**
 - `tcpdump`, `pfctl`, `route`, `ss` — diagnostics
@@ -150,7 +151,7 @@ Planned next steps:
 
 - [ ] Centralized logging (Grafana Loki / Graylog)
 - [ ] Monitoring (Prometheus + Grafana)
-- [ ] IDS/IPS in OPNsense (Suricata or Zenarmor)
+- [x] IDS/IPS in OPNsense (Suricata or Zenarmor)
 - [ ] Automated backup pipeline (Restic to remote storage)
 - [ ] CI/CD pipeline for config changes
 - [ ] Certificate management (cert-manager-style)
