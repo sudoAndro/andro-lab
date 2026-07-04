@@ -23,7 +23,9 @@ This repository documents my self-built homelab — every architectural decision
 
 ![Architecture diagram](./diagrams/architecture.svg)
 
-> 📊 **Full architecture details:** [`docs/architecture.md`](./docs/architecture.md)
+## 📄 Deep Dives
+
+- [VPN-Routed Network Segment](./docs/vpn-network-segment.md) — Policy-Based Routing, Kill Switch, Pi-hole DNS chain & lessons learned
 
 ---
 
