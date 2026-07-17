@@ -21,7 +21,7 @@ This repository documents my self-built homelab — every architectural decision
 
 ## 🏗️ Architecture
 
-![Architecture diagram](./diagrams/architecture.svg)
+![Architecture diagram](https://raw.githubusercontent.com/sudoAndro/sudoAndro/main/assets/andro-lab-network.svg)
 
 ## 📄 Deep Dives
 
