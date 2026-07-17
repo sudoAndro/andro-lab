@@ -128,3 +128,63 @@ router option leaves clients with no gateway ("connected, no internet").
 - **Layer-by-layer debugging** beats guessing: link → gateway → raw IP
   (`ping 1.1.1.1`) → DNS (`ping google.com`). Each step isolates one failure
   domain.
+
+
+---
+
+# Addendum: Multi-Country VPN Gateways
+
+*(Append this to `docs/vpn-network-segment.md` in andro-lab — or keep as its own file next to it.)*
+
+---
+
+## Multi-country exit: one segment, switchable countries
+
+The VPNNET segment now exits through a **second, parallel WireGuard tunnel**
+to a NordVPN server in Croatia. Both tunnels run permanently side by side;
+which one a network segment uses is decided purely by Policy-Based Routing.
+
+| Tunnel | Instance | Interface | Gateway | Used by |
+|--------|----------|-----------|---------|---------|
+| NordVPN (default) | wg0 | NordVPN | NordVPN_GW | Tailscale clients (exit node) |
+| NordVPN Croatia 🇭🇷 | wg1 | VPNHRWifi | NordVPN_HR_GW | VPNNET (VPN-WLAN) |
+
+**Switching country = editing one firewall rule:** change the gateway in the
+VPNNET pass rule, save, apply. No tunnel teardown, no app, no reconnect —
+the tunnels stay up and routing just points elsewhere. Adding a third country
+is the same recipe: new WireGuard instance, new interface, new gateway, new
+outbound NAT rule.
+
+### Gateway configuration quirks worth knowing
+
+- **The gateway IP is just a label.** WireGuard is a point-to-point tunnel —
+  there is no ARP lookup, packets can only go "into the tunnel". OPNsense
+  still requires a *unique* IP per gateway, so the second gateway uses an
+  arbitrary unused address (e.g. `10.5.0.3`) with **Remote/Far Gateway**
+  enabled, since it lies outside the interface's /32 subnet.
+- **Monitor IPs must be unique per gateway.** OPNsense installs a host route
+  for each monitor IP through its gateway — two gateways monitoring the same
+  IP conflict. Here: `1.1.1.1` for the default tunnel, `9.9.9.9` for HR.
+- **"Disable routes" on every additional WireGuard instance.** With Allowed
+  IPs `0.0.0.0/0`, a new tunnel would otherwise install itself as default
+  route for the whole firewall.
+
+---
+
+## Lesson learned #9: A kill switch is only a kill switch once you've tested it
+
+When the HR gateway came up misconfigured (down state), traffic from VPNNET
+did **not** get blocked — it silently fell back to the regular WAN and the
+leak test showed my real IP. The pass rule still matched; OPNsense simply
+dropped the unusable gateway from it and used default routing instead, so the
+kill-switch block rule below never got its turn.
+
+**The fix:** *Firewall → Settings → Advanced → "Skip rules when the gateway
+is down"*. With this enabled, a policy-routing rule whose gateway is down is
+skipped entirely, the block rule underneath takes over, and the segment goes
+dark instead of leaking.
+
+**The takeaway:** the kill switch had been "configured" for weeks — but the
+first real gateway failure revealed it was decorative. Now the drill is part
+of every VPN change: disable the tunnel, confirm the segment loses internet
+completely, re-enable. Trust the test, not the config.
